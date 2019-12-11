@@ -4,7 +4,7 @@
 
 # for help 
 if [ "$1" = "--help" ];then
-      sh ./help.sh
+      sh script/help.sh
 
 
  # To Add Primary mongoDB server     
@@ -16,7 +16,7 @@ elif [ "$2" = "primary" ];then
 
       echo "primary server is setting up \n\n"
       scp -i $key mongod.conf $user@$ip:/tmp/
-      scp -i $key primary.sh $user@$ip:/tmp/
+      scp -i $key script/primary.sh $user@$ip:/tmp/
       ssh -i $key $user@$ip "sh /tmp/primary.sh $ip"
 
 
@@ -30,7 +30,7 @@ elif [ "$2" = "secondary" ];then
 
         echo "secondary server is setting up \n\n"
         echo yes | scp -i $key mongod.conf $user@$ip:/tmp/
-        echo yes | scp -i $key secondary.sh $user@$ip:/tmp/
+        echo yes | scp -i $key script/secondary.sh $user@$ip:/tmp/
         echo yes| ssh -i $key $user@$ip "sh /tmp/secondary.sh $ip"
 
  
@@ -42,7 +42,7 @@ elif [ "$2" = "remove" ];then
         user=$8
 
         echo "unistall MongoDb server server is setting up \n\n"
-        echo yes | scp -i $key unistall.sh $user@$ip:/tmp/
+        echo yes | scp -i $key script/unistall.sh $user@$ip:/tmp/
         echo yes| ssh -i $key $user@$ip "sh /tmp/unistall.sh"
 
 # To add secondary server  from primary entry
@@ -66,7 +66,7 @@ elif [ "$1" = "--remove-secondary" ];then
 
 else
        echo "\nPlease check the command"
-       sh ./help.sh
+       sh script/help.sh
 
 
 fi
